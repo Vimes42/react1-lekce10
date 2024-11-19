@@ -3,6 +3,7 @@ import { ListItem } from '../ListItem';
 
 export const List = () => {
   const [items, setItems] = useState(null);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -14,6 +15,11 @@ export const List = () => {
     fetchItems();
   }, []);
 
+
+  const onSelect = (isSelected) => {
+    setCounter(isSelected ? (counter + 1) : (counter - 1))
+  }
+  
   if (items === null) {
     return <p>Loading...</p>;
   }
@@ -21,8 +27,9 @@ export const List = () => {
   return (
     <div className="list">
       {items.map((item) => (
-        <ListItem key={item.id} item={item} />
+        <ListItem key={item.id} item={item} ifSelected={onSelect}/>
       ))}
+      <p>Počet vybraných položek: {counter} </p>
     </div>
   );
 };
