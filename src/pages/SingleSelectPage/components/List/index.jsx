@@ -4,6 +4,8 @@ import { ListItem } from '../ListItem';
 export const List = () => {
   const [items, setItems] = useState(null);
   const [selectedId, setSelectedId] = useState(null);
+  const [energyValue, setEnergyValue] = useState(0);
+  const [energyUnit, setEnergyUnit] = useState('kcal');
   
   useEffect(() => {
     const fetchItems = async () => {
@@ -27,8 +29,13 @@ export const List = () => {
           item={item}
           selected={item.id === selectedId}
           onSelect={setSelectedId}
+          onEnergyValue={setEnergyValue}
+          onEnergyUnit={setEnergyUnit}
         />
       ))}
+      <div>
+      Energetická hodnota: {energyValue} {energyUnit}
+      </div>
     </div>
   );
 };
